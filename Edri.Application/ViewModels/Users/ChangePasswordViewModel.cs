@@ -1,0 +1,3 @@
+﻿namespace Edri.Application.ViewModels.Users;
+
+public sealed record ChangePasswordViewModel(string Password, string NewPassword);

@@ -1,0 +1,15 @@
+dotnet ef migrations add InitialEventStore_PG -c EventStoreDbContext -p Edri.Infrastructure -s Edri.Api
+
+dotnet ef database update -c EventStoreDbContext -p Edri.Infrastructure -s Edri.Api
+
+
+
+dotnet ef migrations add InitialNotificationStore_PG -c DomainNotificationStoreDbContext -p Edri.Infrastructure -s Edri.Api
+
+dotnet ef database update -c DomainNotificationStoreDbContext -p Edri.Infrastructure -s Edri.Api
+
+
+
+dotnet ef migrations add InitialApp_PG -c ApplicationDbContext -p Edri.Infrastructure -s Edri.Api
+
+dotnet ef database update -c ApplicationDbContext -p Edri.Infrastructure -s Edri.Api

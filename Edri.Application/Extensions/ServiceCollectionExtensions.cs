@@ -39,6 +39,15 @@ using Edri.Application.ViewModels.Supplies;
 using Edri.Application.Queries.Meters.GetMeterById;
 using Edri.Application.Queries.Meters.GetAll;
 using Edri.Application.ViewModels.Meters;
+using Edri.Application.Queries.Devices.GetDeviceById;
+using Edri.Application.Queries.Devices.GetAll;
+using Edri.Application.ViewModels.Devices;
+using Edri.Application.Queries.Captures.GetCaptureById;
+using Edri.Application.Queries.Captures.GetAll;
+using Edri.Application.ViewModels.Captures;
+using Edri.Application.Queries.Readings.GetReadingById;
+using Edri.Application.Queries.Readings.GetAll;
+using Edri.Application.ViewModels.Readings;
 
 namespace Edri.Application.Extensions;
 
@@ -57,7 +66,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITariffService, TariffService>();
         services.AddScoped<ISupplyService, SupplyService>();
         services.AddScoped<IMeterService, MeterService>();
-
+        services.AddScoped<IDeviceService, DeviceService>();
+        services.AddScoped<ICaptureService, CaptureService>();
+        services.AddScoped<IReadingService, ReadingService>();
         return services;
     }
 
@@ -107,6 +118,15 @@ public static class ServiceCollectionExtensions
         // Meter
         services.AddScoped<IRequestHandler<GetMeterByIdQuery, MeterViewModel?>, GetMeterByIdQueryHandler>();
         services.AddScoped<IRequestHandler<GetAllMetersQuery, PagedResult<MeterViewModel>>, GetAllMetersQueryHandler>();
+        // Device
+        services.AddScoped<IRequestHandler<GetDeviceByIdQuery, DeviceViewModel?>, GetDeviceByIdQueryHandler>();
+        services.AddScoped<IRequestHandler<GetAllDevicesQuery, PagedResult<DeviceViewModel>>, GetAllDevicesQueryHandler>();
+
+        services.AddScoped<IRequestHandler<GetCaptureByIdQuery, CaptureViewModel?>, GetCaptureByIdQueryHandler>();
+        services.AddScoped<IRequestHandler<GetAllCapturesQuery, PagedResult<CaptureViewModel>>, GetAllCapturesQueryHandler>();
+        // Reading
+        services.AddScoped<IRequestHandler<GetReadingByIdQuery, ReadingViewModel?>, GetReadingByIdQueryHandler>();
+        services.AddScoped<IRequestHandler<GetAllReadingsQuery, PagedResult<ReadingViewModel>>, GetAllReadingsQueryHandler>();
         return services;
     }
 
@@ -123,6 +143,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISortingExpressionProvider<TariffViewModel, Tariff>, TariffViewModelSortProvider>();
         services.AddScoped<ISortingExpressionProvider<SupplyViewModel, Supply>, SupplyViewModelSortProvider>();
         services.AddScoped<ISortingExpressionProvider<MeterViewModel, Meter>, MeterViewModelSortProvider>();
+        services.AddScoped<ISortingExpressionProvider<DeviceViewModel, Device>, DeviceViewModelSortProvider>();
+        services.AddScoped<ISortingExpressionProvider<CaptureViewModel, Capture>, CaptureViewModelSortProvider>();
+        services.AddScoped<ISortingExpressionProvider<ReadingViewModel, Reading>, ReadingViewModelSortProvider>();
 
         return services;
     }

@@ -56,6 +56,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITariffRepository, TariffRepository>();
         services.AddScoped<ISupplyRepository, SupplyRepository>();
         services.AddScoped<IMeterRepository, MeterRepository>();
+        services.AddScoped<IDeviceRepository, DeviceRepository>();
+        services.AddScoped<ICaptureRepository, CaptureRepository>();
+        services.AddScoped<IReadingRepository, ReadingRepository>();
         return services;
     }
 }

@@ -22,6 +22,11 @@ public partial class ApplicationDbContext : DbContext
     public DbSet<Tariff> Tariffs { get; set; } = null!;
     public DbSet<Supply> Supplies { get; set; } = null!;
     public DbSet<Meter> Meters { get; set; } = null!;
+    public DbSet<Device> Devices { get; set; } = null!;
+
+    public DbSet<Reading> Readings { get; set; } = null!;
+
+    public DbSet<Domain.Entities.Capture> Captures { get; set; } = null!;
 
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -64,5 +69,8 @@ public partial class ApplicationDbContext : DbContext
         builder.ApplyConfiguration(new TariffConfiguration());
         builder.ApplyConfiguration(new SupplyConfiguration());
         builder.ApplyConfiguration(new MeterConfiguration());
+        builder.ApplyConfiguration(new DeviceConfiguration());
+        builder.ApplyConfiguration(new CaptureConfiguration());
+        builder.ApplyConfiguration(new ReadingConfiguration());
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Edri.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Edri.Infrastructure.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260223202534_AddCaptureTable")]
+    partial class AddCaptureTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1048,125 +1051,6 @@ namespace Edri.Infrastructure.Migrations.ApplicationDb
                         });
                 });
 
-            modelBuilder.Entity("Edri.Domain.Entities.Reading", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("CaptureId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("DeviceId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("MeterNumber")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<string>("Observations")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<decimal?>("OcrConfidence")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("numeric(5,2)");
-
-                    b.Property<DateTime>("ReadingDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("Source")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal>("ValueKwh")
-                        .HasPrecision(18, 4)
-                        .HasColumnType("numeric(18,4)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CaptureId");
-
-                    b.HasIndex("DeviceId");
-
-                    b.HasIndex("MeterNumber");
-
-                    b.HasIndex("ReadingDate");
-
-                    b.HasIndex("MeterNumber", "ReadingDate");
-
-                    b.ToTable("Readings", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ae000000-0000-0000-0000-000000000001"),
-                            CaptureId = new Guid("ca000000-0000-0000-0000-000000000001"),
-                            DeviceId = new Guid("de000000-0000-0000-0000-000000000001"),
-                            MeterNumber = "MED-2025-000001",
-                            OcrConfidence = 98.5m,
-                            ReadingDate = new DateTime(2025, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Source = 1,
-                            ValueKwh = 1250.50m
-                        },
-                        new
-                        {
-                            Id = new Guid("ae000000-0000-0000-0000-000000000002"),
-                            CaptureId = new Guid("ca000000-0000-0000-0000-000000000002"),
-                            DeviceId = new Guid("de000000-0000-0000-0000-000000000001"),
-                            MeterNumber = "MED-2025-000001",
-                            OcrConfidence = 99.1m,
-                            ReadingDate = new DateTime(2025, 1, 20, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Source = 1,
-                            ValueKwh = 1320.75m
-                        },
-                        new
-                        {
-                            Id = new Guid("ae000000-0000-0000-0000-000000000003"),
-                            CaptureId = new Guid("ca000000-0000-0000-0000-000000000003"),
-                            DeviceId = new Guid("de000000-0000-0000-0000-000000000002"),
-                            MeterNumber = "MED-2025-000002",
-                            OcrConfidence = 97.8m,
-                            ReadingDate = new DateTime(2025, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Source = 1,
-                            ValueKwh = 980.25m
-                        },
-                        new
-                        {
-                            Id = new Guid("ae000000-0000-0000-0000-000000000004"),
-                            CaptureId = new Guid("ca000000-0000-0000-0000-000000000005"),
-                            DeviceId = new Guid("de000000-0000-0000-0000-000000000003"),
-                            MeterNumber = "MED-2025-000003",
-                            OcrConfidence = 99.5m,
-                            ReadingDate = new DateTime(2025, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Source = 1,
-                            ValueKwh = 5420.00m
-                        },
-                        new
-                        {
-                            Id = new Guid("ae000000-0000-0000-0000-000000000005"),
-                            DeviceId = new Guid("de000000-0000-0000-0000-000000000004"),
-                            MeterNumber = "MED-2025-000004",
-                            Observations = "Lectura manual - dispositivo en mantenimiento",
-                            ReadingDate = new DateTime(2025, 1, 15, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Source = 2,
-                            ValueKwh = 15800.00m
-                        },
-                        new
-                        {
-                            Id = new Guid("ae000000-0000-0000-0000-000000000006"),
-                            DeviceId = new Guid("de000000-0000-0000-0000-000000000002"),
-                            MeterNumber = "MED-2025-000002",
-                            Observations = "Lectura estimada basada en consumo promedio histórico",
-                            ReadingDate = new DateTime(2025, 1, 20, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Source = 3,
-                            ValueKwh = 1045.00m
-                        });
-                });
-
             modelBuilder.Entity("Edri.Domain.Entities.Supply", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1676,24 +1560,6 @@ namespace Edri.Infrastructure.Migrations.ApplicationDb
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Department");
-                });
-
-            modelBuilder.Entity("Edri.Domain.Entities.Reading", b =>
-                {
-                    b.HasOne("Edri.Domain.Entities.Capture", "Capture")
-                        .WithMany()
-                        .HasForeignKey("CaptureId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Edri.Domain.Entities.Device", "Device")
-                        .WithMany()
-                        .HasForeignKey("DeviceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Capture");
-
-                    b.Navigation("Device");
                 });
 
             modelBuilder.Entity("Edri.Domain.Entities.Supply", b =>

@@ -41,7 +41,14 @@ using Edri.Domain.Commands.Meters.CreateMeter;
 using Edri.Domain.Commands.Meters.DeleteMeter;
 using Edri.Domain.Commands.Meters.UpdateMeter;
 using Edri.Shared.Events.Meter;
-
+using Edri.Domain.Commands.Devices.CreateDevice;
+using Edri.Domain.Commands.Devices.DeleteDevice;
+using Edri.Domain.Commands.Devices.UpdateDevice;
+using Edri.Shared.Events.Device;
+using Edri.Domain.Commands.Readings.CreateReading;
+using Edri.Domain.Commands.Readings.DeleteReading;
+using Edri.Domain.Commands.Readings.UpdateReading;
+using Edri.Shared.Events.Reading;
 namespace Edri.Domain.Extensions;
 
 public static class ServiceCollectionExtension
@@ -90,6 +97,14 @@ public static class ServiceCollectionExtension
         services.AddScoped<IRequestHandler<CreateMeterCommand>, CreateMeterCommandHandler>();
         services.AddScoped<IRequestHandler<UpdateMeterCommand>, UpdateMeterCommandHandler>();
         services.AddScoped<IRequestHandler<DeleteMeterCommand>, DeleteMeterCommandHandler>();
+        // Device
+        services.AddScoped<IRequestHandler<CreateDeviceCommand>, CreateDeviceCommandHandler>();
+        services.AddScoped<IRequestHandler<UpdateDeviceCommand>, UpdateDeviceCommandHandler>();
+        services.AddScoped<IRequestHandler<DeleteDeviceCommand>, DeleteDeviceCommandHandler>();
+        // Reading
+        services.AddScoped<IRequestHandler<CreateReadingCommand>, CreateReadingCommandHandler>();
+        services.AddScoped<IRequestHandler<UpdateReadingCommand>, UpdateReadingCommandHandler>();
+        services.AddScoped<IRequestHandler<DeleteReadingCommand>, DeleteReadingCommandHandler>();
 
         return services;
     }
@@ -140,6 +155,14 @@ public static class ServiceCollectionExtension
         services.AddScoped<INotificationHandler<MeterCreatedEvent>, MeterEventHandler>();
         services.AddScoped<INotificationHandler<MeterUpdatedEvent>, MeterEventHandler>();
         services.AddScoped<INotificationHandler<MeterDeletedEvent>, MeterEventHandler>();
+        // Device
+        services.AddScoped<INotificationHandler<DeviceCreatedEvent>, DeviceEventHandler>();
+        services.AddScoped<INotificationHandler<DeviceUpdatedEvent>, DeviceEventHandler>();
+        services.AddScoped<INotificationHandler<DeviceDeletedEvent>, DeviceEventHandler>();
+        // Reading
+        services.AddScoped<INotificationHandler<ReadingCreatedEvent>, ReadingEventHandler>();
+        services.AddScoped<INotificationHandler<ReadingUpdatedEvent>, ReadingEventHandler>();
+        services.AddScoped<INotificationHandler<ReadingDeletedEvent>, ReadingEventHandler>();
 
         return services;
     }
